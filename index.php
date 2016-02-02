@@ -1,27 +1,28 @@
 <?php
-
-require_once ("Bank.php");
-require_once ("Card.php");
-require_once ("Deck.php");
-require_once ("Player.php");
-
-
-//SCENARIO 1
-$deck = new Deck();
-$deck->shuffle();
-$bank = new Bank();
-$bank->take($deck->deal(2));
-//tire 2 cartes du deck, la banque les prends
-while( $bank->getHandValue() < 17){
-    //tant que la banque a moins de 17, elle tire
-    $bank->take($deck->deal(1));
+if (isset($_POST['choice'])) {
+    header('Location: ' . $_SERVER['REQUEST_URI']);
+    exit;
 }
-if($bank->getHandValue() > 21){
-    echo "La banque perd ".$bank->getHandValue();
-}else{
-    echo "La banque a ".$bank->getHandValue();
-}
+?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
 
+<form method="POST">
+   <h3>Une autre carte?</h3>
+    <input type="radio" name="choice" value="yes" checked="checked">oui<br>
+    <input type="radio" name="choice" value="no">non<br><br>
+    <input type="submit" value="ok">
+</form>
 
+<?php
+require_once "game.php";
+?>
 
+</body>
+</html>
